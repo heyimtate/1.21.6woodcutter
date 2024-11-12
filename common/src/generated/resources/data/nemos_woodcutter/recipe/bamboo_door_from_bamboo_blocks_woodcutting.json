@@ -1,0 +1,9 @@
+{
+  "type": "nemos_woodcutter:woodcutting",
+  "ingredient": "#minecraft:bamboo_blocks",
+  "inputCount": 1,
+  "result": {
+    "count": 4,
+    "id": "minecraft:bamboo_door"
+  }
+}

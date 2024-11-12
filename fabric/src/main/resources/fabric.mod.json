@@ -12,16 +12,18 @@
         "sources": "https://github.com/FabricMC/fabric-example-mod"
     },
     "license": "${license}",
-    "icon": "${mod_id}.png",
+    "icon": "icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.example.examplemod.ExampleMod"
+            "com.nemonotfound.nemos.woodcutter.NemosWoodcutterFabric"
+        ],
+        "client": [
+          "com.nemonotfound.nemos.woodcutter.NemosWoodcutterClientFabric"
         ]
     },
     "mixins": [
-        "${mod_id}.mixins.json",
-        "${mod_id}.fabric.mixins.json"
+        "${mod_id}.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",

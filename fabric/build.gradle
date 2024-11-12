@@ -12,6 +12,12 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 }
 
+version = minecraft_version + "-" + version
+
+base {
+    archivesName = "${mod_id_jar}-Fabric"
+}
+
 loom {
     def aw = project(':common').file("src/main/resources/${mod_id}.accesswidener")
     if (aw.exists()) {
@@ -35,3 +41,5 @@ loom {
         }
     }
 }
+
+sourceSets.main.resources { srcDir project.project(':common').file('src/generated/resources/').getAbsolutePath() }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "nemos_woodcutter:block/woodcutter",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nemos_woodcutter:block/woodcutter"
+    },
+    "facing=south": {
+      "model": "nemos_woodcutter:block/woodcutter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nemos_woodcutter:block/woodcutter",
+      "y": 270
+    }
+  }
+}

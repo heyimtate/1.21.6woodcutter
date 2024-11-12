@@ -1,0 +1,9 @@
+{
+  "type": "nemos_woodcutter:woodcutting",
+  "ingredient": "#minecraft:bamboo_blocks",
+  "inputCount": 1,
+  "result": {
+    "count": 8,
+    "id": "minecraft:bamboo_slab"
+  }
+}

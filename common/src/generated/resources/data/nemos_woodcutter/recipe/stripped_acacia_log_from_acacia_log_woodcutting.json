@@ -1,0 +1,9 @@
+{
+  "type": "nemos_woodcutter:woodcutting",
+  "ingredient": "minecraft:acacia_log",
+  "inputCount": 1,
+  "result": {
+    "count": 1,
+    "id": "minecraft:stripped_acacia_log"
+  }
+}

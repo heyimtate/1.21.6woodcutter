@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "nemos_woodcutter:spruce_trapdoor_from_spruce_logs_woodcutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "spruce_logs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:spruce_logs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "spruce_logs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "nemos_woodcutter:spruce_trapdoor_from_spruce_logs_woodcutting"
+    ]
+  }
+}

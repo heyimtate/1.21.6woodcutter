@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "#minecraft:logs",
+    "I": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    " I ",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "nemos_woodcutter:woodcutter"
+  }
+}

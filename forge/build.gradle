@@ -3,12 +3,14 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
 }
+
+version = minecraft_version + "-" + version
+
 base {
-    archivesName = "${mod_name}-forge-${minecraft_version}"
+    archivesName = "${mod_id_jar}-Forge"
 }
 mixin {
     config("${mod_id}.mixins.json")
-    config("${mod_id}.forge.mixins.json")
 }
 
 minecraft {
@@ -64,7 +66,7 @@ minecraft {
     }
 }
 
-sourceSets.main.resources.srcDir 'src/generated/resources'
+sourceSets.main.resources { srcDir project.project(':common').file('src/generated/resources/').getAbsolutePath() }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
@@ -72,6 +74,11 @@ dependencies {
 
     // Forge's hack fix
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
+
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.1")) {
+        jarJar.ranged(it, "[0.4.1,)")
+    }
 }
 
 publishing {

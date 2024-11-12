@@ -1,0 +1,9 @@
+{
+  "type": "nemos_woodcutter:woodcutting",
+  "ingredient": "minecraft:bamboo_planks",
+  "inputCount": 1,
+  "result": {
+    "count": 1,
+    "id": "minecraft:bamboo_mosaic"
+  }
+}

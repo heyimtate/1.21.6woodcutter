@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "nemos_woodcutter:jungle_stairs_from_jungle_logs_woodcutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "jungle_logs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:jungle_logs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "jungle_logs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "nemos_woodcutter:jungle_stairs_from_jungle_logs_woodcutting"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "nemos_woodcutter:woodcutting",
+  "ingredient": "minecraft:warped_planks",
+  "inputCount": 1,
+  "result": {
+    "count": 1,
+    "id": "minecraft:warped_fence_gate"
+  }
+}

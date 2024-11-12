@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.nemonotfound.nemos.woodcutter.mixin",
+  "refmap": "${mod_id}.refmap.json",
+  "compatibilityLevel": "JAVA_18",
+  "mixins": [
+    "ClientWorldMixin",
+    "ServerRecipeManagerMixin",
+    "PlayerManagerMixin",
+    "PlayStateFactoriesMixin"
+  ],
+  "client": [
+    "ClientGameNetworkHandlerMixin",
+    "ClientGamePacketListenerMixin",
+    "ClientCommonNetworkHandlerMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
+

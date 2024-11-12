@@ -23,7 +23,7 @@ Instead of creating an instance of the RecipeGenerator in your RecipeProvider, c
 There, you have all the methods you need to create a woodcutting recipe.
 
 ## Manually
-Here is an example of the recipe json file:
+Here is an example of the recipe json file for fabric:
 ```
 {
   "type": "nemos-woodcutter:woodcutting",
@@ -35,6 +35,20 @@ Here is an example of the recipe json file:
   }
 }
 ```
+
+Forge:
+```
+{
+  "type": "nemos_woodcutter:woodcutting",
+  "ingredient": "minecraft:acacia_planks",
+  "inputCount": 1,
+  "result": {
+    "count": 3,
+    "id": "minecraft:acacia_sign"
+  }
+}
+```
+
 <br><br>
 
 # Compatibilities  
