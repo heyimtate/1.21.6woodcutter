@@ -1,5 +1,5 @@
 {
-  "render_type": "minecraft:translucent",
+  "render_type": "cutout",
   "parent": "block/block",
   "textures": {
     "particle": "nemos_woodcutter:block/woodcutter_bottom",
