@@ -25,8 +25,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(Constants.MOD_ID)
 public class NemosWoodcutterForge {
 
-    public NemosWoodcutterForge() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public NemosWoodcutterForge(FMLJavaModLoadingContext context) {
+        final IEventBus eventBus = context.getModEventBus();
         NemosWoodcutterCommon.init();
 
         eventBus.addListener(ModCreativeModeTabs::modifyFunctionalItemGroup);

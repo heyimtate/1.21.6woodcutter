@@ -12,8 +12,6 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 }
 
-version = minecraft_version + "-" + version
-
 base {
     archivesName = "${mod_id_jar}-Fabric"
 }
