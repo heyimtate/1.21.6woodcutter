@@ -3,8 +3,6 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
-version = minecraft_version + "-" + version
-
 base {
     archivesName = "${mod_id_jar}-NeoForge"
 }

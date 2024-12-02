@@ -15,7 +15,6 @@ public class NemosWoodcutterClientNeoForge {
 
     public NemosWoodcutterClientNeoForge(IEventBus eventBus) {
         eventBus.addListener(this::registerScreen);
-        //BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WOODCUTTER.get(), RenderType.cutout());
     }
 
     @SubscribeEvent
