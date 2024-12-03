@@ -1,0 +1,9 @@
+{
+  "type": "nemos_woodcutter:woodcutting",
+  "ingredient": "#minecraft:pale_oak_logs",
+  "inputCount": 1,
+  "result": {
+    "count": 4,
+    "id": "minecraft:pale_oak_planks"
+  }
+}

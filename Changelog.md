@@ -1,4 +1,4 @@
-# Changelog v1.12.4
+# Changelog v1.12.5
 
-## Fixes
-- Woodcutter not dropping when broken
+## Additions
+- Added recipes for pale wood

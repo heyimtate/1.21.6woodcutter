@@ -15,11 +15,11 @@ import static com.nemonotfound.nemos.woodcutter.Constants.MOD_ID;
 public class DataGenerators {
 
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
+    public static void gatherData(GatherDataEvent.Client event) {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        generator.addProvider(event.includeServer(), new ModRecipeProvider.Runner(packOutput, lookupProvider));
+        event.addProvider(new ModRecipeProvider.Runner(packOutput, lookupProvider));
     }
 }
