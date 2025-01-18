@@ -1,4 +1,4 @@
-# Changelog v1.12.5
+# Changelog v1.12.6
 
-## Additions
-- Added recipes for pale wood
+## Fixes
+- Using woodcutter can cause crashes on servers

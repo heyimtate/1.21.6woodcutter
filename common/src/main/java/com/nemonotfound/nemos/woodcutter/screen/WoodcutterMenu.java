@@ -269,10 +269,11 @@ public class WoodcutterMenu extends AbstractContainerMenu {
     }
 
     private boolean isWoodcuttingRecipe(ItemStack itemStack2) {
-        return (this.level instanceof ServerLevel serverWorld &&
-                ((WoodcutterRecipeGetter) serverWorld.recipeAccess()).nemosWoodcutter$getWoodcutterRecipes().contains(itemStack2)) ||
-                (this.level instanceof ClientLevel clientWorld &&
-                        ((ModRecipeManagerGetter) clientWorld).nemosWoodcutter$getModRecipeManager().getWoodcutterRecipes().contains(itemStack2));
+        boolean isClientSide = this.level.isClientSide();
+
+        return (!isClientSide &&
+                ((WoodcutterRecipeGetter) this.level.recipeAccess()).nemosWoodcutter$getWoodcutterRecipes().contains(itemStack2)) ||
+                (isClientSide && ((ModRecipeManagerGetter) this.level).nemosWoodcutter$getModRecipeManager().getWoodcutterRecipes().contains(itemStack2));
     }
 
     @Override
