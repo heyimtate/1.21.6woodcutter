@@ -1,4 +1,4 @@
-# Changelog v1.12.6
+# Changelog v1.13
 
-## Fixes
-- Using woodcutter can cause crashes on servers
+## Additions
+- Added built-in dark mode resource pack

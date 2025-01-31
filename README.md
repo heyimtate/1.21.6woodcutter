@@ -3,6 +3,7 @@
 
 # Description
 With the Woodcutter you can do everything that a Stonecutter does, just for wood!<br>
+**Note:** If you're a dark mode enthusiast, you can use the built-in dark mode resource pack.
 
 [![Join my Discord](https://github.com/NemoNotFound/NemoNotFound/blob/master/resources/svg/join_discord_button.svg?raw=true)](https://discord.com/invite/yxs9dga)
 <br>
