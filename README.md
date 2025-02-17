@@ -20,7 +20,7 @@ For more information and the recipes check the [wiki](https://www.nemonotfound.c
 
 # Adding Woodcutting Recipes to Your Mod (1.21.2+)
 ## Data Generation
-Instead of creating an instance of the RecipeGenerator in your RecipeProvider, create an instance of the WoodcutterGenerator.
+Instead of creating an instance of the RecipeGenerator in your RecipeProvider, create an instance of the WoodcutterRecipeProvider.
 There, you have all the methods you need to create a woodcutting recipe.
 
 ## Manually
