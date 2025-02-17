@@ -18,26 +18,6 @@ For more information and the recipes check the [wiki](https://github.com/NemoNot
 <br>
 <br>
 
-# Adding Woodcutting Recipes to Your Mod (1.21.2+)
-## Data Generation
-Instead of creating an instance of the RecipeGenerator in your RecipeProvider, create an instance of the WoodcutterRecipeProvider.
-There, you have all the methods you need to create a woodcutting recipe.
-
-## Manually
-Here is an example of the recipe json file:
-```
-{
-  "type": "nemos_woodcutter:woodcutting",
-  "ingredient": "minecraft:acacia_planks",
-  "inputCount": 1,
-  "result": {
-    "count": 3,
-    "id": "minecraft:acacia_sign"
-  }
-}
-```
-<br><br>
-
 # Compatibilities  
 - [Nemo's Mossy Blocks](https://www.curseforge.com/minecraft/mc-mods/nemos-mossy-blocks) by NemoNotFound (me) - Version 1.20.1 - 1.21.1
 - [More Slabs, Stairs, and Walls](https://www.curseforge.com/minecraft/mc-mods/more-slabs-stairs-and-walls) by Nibaru - Version 1.19.2 - 1.20.4
