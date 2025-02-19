@@ -33,12 +33,6 @@ For more information and the recipes check the [wiki](https://github.com/NemoNot
 <br>
 <br>
 
-# Downloads
-- [CurseForge](https://curseforge.com/minecraft/mc-mods/nemos-woodcutter)
-- [Modrinth](https://modrinth.com/mod/nemos-woodcutter)
-<br>
-<br>
-
 # Get a Minecraft Server
 Looking for a Minecraft Server? Check out [BisectHosting](https://bisecthosting.com/Nemo404)! <br>
 Use my code **Nemo404** to get a 25% discount on your first month with any of their gaming servers. <br><br>
