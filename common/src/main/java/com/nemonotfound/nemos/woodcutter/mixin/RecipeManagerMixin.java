@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Mixin(RecipeManager.class)
-public abstract class ServerRecipeManagerMixin implements WoodcutterRecipeGetter {
+public abstract class RecipeManagerMixin implements WoodcutterRecipeGetter {
 
     @Shadow private RecipeMap recipes;
     @Unique
@@ -43,7 +43,7 @@ public abstract class ServerRecipeManagerMixin implements WoodcutterRecipeGetter
     }
 
     @Inject(method = "finalizeRecipeLoading", at = @At("TAIL"))
-    private void initialize(FeatureFlagSet featureFlagSet, CallbackInfo ci) {
+    private void finalizeRecipeLoading(FeatureFlagSet featureFlagSet, CallbackInfo ci) {
         List<WoodcuttingRecipeDisplay.GroupEntry> woodcuttingRecipeEntries = new ArrayList<>();
         this.recipes.values().forEach(
                 recipeEntry -> {

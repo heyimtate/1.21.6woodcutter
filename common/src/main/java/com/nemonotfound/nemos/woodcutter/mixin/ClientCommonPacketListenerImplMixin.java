@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(ClientCommonPacketListenerImpl.class)
-public class ClientCommonNetworkHandlerMixin implements MinecraftClientGetter {
+public class ClientCommonPacketListenerImplMixin implements MinecraftClientGetter {
 
     @Shadow @Final protected Minecraft minecraft;
 

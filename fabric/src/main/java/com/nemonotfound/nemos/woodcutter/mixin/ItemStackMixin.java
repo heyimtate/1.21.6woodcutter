@@ -14,7 +14,7 @@ public class ItemStackMixin {
     @ModifyVariable(at = @At("HEAD"), method = "parse", argsOnly = true)
     private static Tag parse(Tag tag) {
         if (tag instanceof CompoundTag) {
-            String tagString = tag.getAsString();
+            String tagString = tag.toString();
             if (tagString.contains("nemos-woodcutter:woodcutter")) {
                 ((CompoundTag) tag).put("id", StringTag.valueOf("nemos_woodcutter:woodcutter"));
             }

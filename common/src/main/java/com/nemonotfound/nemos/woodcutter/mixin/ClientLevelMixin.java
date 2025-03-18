@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(ClientLevel.class)
-public class ClientWorldMixin implements ModRecipeManagerGetter {
+public class ClientLevelMixin implements ModRecipeManagerGetter {
 
     @Shadow @Final
     private ClientPacketListener connection;

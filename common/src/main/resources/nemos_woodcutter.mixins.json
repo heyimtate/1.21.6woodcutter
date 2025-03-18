@@ -5,15 +5,15 @@
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_18",
   "mixins": [
-    "ClientWorldMixin",
-    "ServerRecipeManagerMixin",
+    "ClientLevelMixin",
+    "RecipeManagerMixin",
     "PlayerListMixin",
-    "PlayStateFactoriesMixin"
+    "GameProtocolsMixin"
   ],
   "client": [
-    "ClientGameNetworkHandlerMixin",
+    "ClientPacketListenerMixin",
     "ClientGamePacketListenerMixin",
-    "ClientCommonNetworkHandlerMixin"
+    "ClientCommonPacketListenerImplMixin"
   ],
   "server": [],
   "injectors": {
