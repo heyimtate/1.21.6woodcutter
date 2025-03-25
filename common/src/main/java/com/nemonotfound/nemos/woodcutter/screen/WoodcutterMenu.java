@@ -69,7 +69,7 @@ public class WoodcutterMenu extends AbstractContainerMenu {
 
             @Override
             public void onTake(@NotNull Player player, @NotNull ItemStack stack) {
-                stack.onCraftedBy(player.level(), player, stack.getCount());
+                stack.onCraftedBy(player, stack.getCount());
                 WoodcutterMenu.this.output.awardUsedRecipes(player, this.getInputStacks());
                 int recipeInputCount = availableRecipes.entries().get(selectedRecipe.get()).inputCount();
                 ItemStack itemStack = WoodcutterMenu.this.inputSlot.remove(recipeInputCount);
@@ -226,7 +226,7 @@ public class WoodcutterMenu extends AbstractContainerMenu {
             Item item = itemStack2.getItem();
             itemStack = itemStack2.copy();
             if (slot == 1) {
-                item.onCraftedBy(itemStack2, player.level(), player);
+                item.onCraftedBy(itemStack2, player);
                 if (!this.moveItemStackTo(itemStack2, 2, 38, true)) {
                     return ItemStack.EMPTY;
                 }
