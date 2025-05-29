@@ -1,4 +1,4 @@
-# Changelog v1.12.7
+# Changelog v1.12.8
 
-## Additions
-- Added built-in dark mode resource pack
+## Fixes
+- Fixed possible crash on server
