@@ -7,6 +7,7 @@ plugins {
 base {
     archivesName = "${mod_id_jar}-Forge"
 }
+
 mixin {
     config("${mod_id}.mixins.json")
 }
@@ -17,7 +18,7 @@ tasks.named("assemble").configure {
 
 jar {
     manifest {
-        attributes["MixinConfigs"] = "${mod_id}.mixins.json, ${mod_id}.forge.mixins.json"
+        attributes["MixinConfigs"] = "${mod_id}.mixins.json"
     }
 }
 

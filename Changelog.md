@@ -1,4 +1,4 @@
-# Changelog v1.12.8
+# Changelog v1.12.8.1
 
 ## Fixes
-- Fixed possible crash on server
+- Fixed instant crash
