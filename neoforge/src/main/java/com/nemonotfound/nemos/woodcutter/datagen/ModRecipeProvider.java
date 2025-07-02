@@ -338,6 +338,7 @@ public class ModRecipeProvider extends WoodcutterRecipeProvider {
         createWoodcuttingRecipe(RecipeCategory.REDSTONE, ItemTags.OAK_LOGS, "oak_logs", Items.OAK_DOOR, 4);
         createWoodcuttingRecipe(RecipeCategory.REDSTONE, ItemTags.OAK_LOGS, "oak_logs", Items.OAK_FENCE_GATE, 4);
         createWoodcuttingRecipe(RecipeCategory.DECORATIONS, ItemTags.OAK_LOGS, "oak_logs", Items.OAK_FENCE, 4);
+        createWoodcuttingRecipe(RecipeCategory.DECORATIONS, ItemTags.OAK_LOGS, "oak_logs", Items.LADDER, 8);
         createWoodcuttingRecipe(RecipeCategory.REDSTONE, ItemTags.OAK_LOGS, "oak_logs", Items.OAK_PRESSURE_PLATE, 16);
         createWoodcuttingRecipe(RecipeCategory.DECORATIONS, ItemTags.OAK_LOGS, "oak_logs", Items.OAK_SIGN, 12);
         createWoodcuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ItemTags.OAK_LOGS, "oak_logs", Items.OAK_SLAB, 8);
