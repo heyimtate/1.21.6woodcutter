@@ -1,4 +1,4 @@
-# Changelog v1.12.8.1
+# Changelog v1.12.9
 
 ## Fixes
-- Fixed instant crash
+- Fixed result slot vanishing when clicking on recipe twice
