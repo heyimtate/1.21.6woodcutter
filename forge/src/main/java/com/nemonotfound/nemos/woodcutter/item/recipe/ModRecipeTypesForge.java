@@ -2,7 +2,7 @@ package com.nemonotfound.nemos.woodcutter.item.recipe;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.registries.DeferredRegister;
 
 import static com.nemonotfound.nemos.woodcutter.Constants.LOG;
@@ -13,7 +13,7 @@ public class ModRecipeTypesForge {
 
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE = DeferredRegister.create(Registries.RECIPE_TYPE, MOD_ID);
 
-    public static void register(IEventBus eventBus) {
+    public static void register(BusGroup eventBus) {
         LOG.info("Register recipe types");
         RECIPE_TYPE.register(eventBus);
 

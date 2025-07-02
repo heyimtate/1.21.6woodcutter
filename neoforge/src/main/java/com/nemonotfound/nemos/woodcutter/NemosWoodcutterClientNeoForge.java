@@ -1,14 +1,14 @@
 package com.nemonotfound.nemos.woodcutter;
 
 
-import com.nemonotfound.nemos.woodcutter.screen.WoodcutterScreen;
+import com.nemonotfound.nemos.woodcutter.client.gui.screen.WoodcutterScreen;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-import static com.nemonotfound.nemos.woodcutter.screen.ModMenuTypes.WOODCUTTER_SCREEN_HANDLER;
+import static com.nemonotfound.nemos.woodcutter.client.gui.screen.ModMenuTypes.WOODCUTTER_SCREEN_HANDLER;
 
 @Mod(value = Constants.MOD_ID, dist = Dist.CLIENT)
 public class NemosWoodcutterClientNeoForge {

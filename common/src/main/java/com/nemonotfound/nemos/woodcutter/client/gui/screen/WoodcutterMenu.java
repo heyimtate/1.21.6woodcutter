@@ -1,4 +1,4 @@
-package com.nemonotfound.nemos.woodcutter.screen;
+package com.nemonotfound.nemos.woodcutter.client.gui.screen;
 
 import com.nemonotfound.nemos.woodcutter.block.ModBlocks;
 import com.nemonotfound.nemos.woodcutter.interfaces.ModRecipeManagerGetter;
@@ -24,43 +24,43 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Optional;
 
-import static com.nemonotfound.nemos.woodcutter.screen.ModMenuTypes.WOODCUTTER_SCREEN_HANDLER;
+import static com.nemonotfound.nemos.woodcutter.client.gui.screen.ModMenuTypes.WOODCUTTER_SCREEN_HANDLER;
 
 //TODO: Needs refactoring
 public class WoodcutterMenu extends AbstractContainerMenu {
 
-    private final ContainerLevelAccess containerLevelAccess;
-    private final DataSlot selectedRecipe = DataSlot.standalone();
+    private final ContainerLevelAccess access;
+    private final DataSlot selectedRecipeIndex = DataSlot.standalone();
     private final Level level;
-    private WoodcuttingRecipeDisplay.Grouping availableRecipes = WoodcuttingRecipeDisplay.Grouping.empty();
+    private WoodcuttingRecipeDisplay.Grouping recipesForInput = WoodcuttingRecipeDisplay.Grouping.empty();
     private ItemStack inputStack = ItemStack.EMPTY;
     long lastTakeTime;
     final Slot inputSlot;
-    final Slot outputSlot;
-    Runnable contentsChangedListener = () -> {};
+    final Slot resultSlot;
+    Runnable slotUpdateListener = () -> {};
     public final Container input = new SimpleContainer(1){
 
         @Override
         public void setChanged() {
             super.setChanged();
             WoodcutterMenu.this.slotsChanged(this);
-            WoodcutterMenu.this.contentsChangedListener.run();
+            WoodcutterMenu.this.slotUpdateListener.run();
         }
     };
 
-    final ResultContainer output = new ResultContainer();
+    final ResultContainer resultContainer = new ResultContainer();
 
     public WoodcutterMenu(int syncId, Inventory playerInventory) {
         this(syncId, playerInventory, ContainerLevelAccess.NULL);
     }
 
-    public WoodcutterMenu(int syncId, Inventory playerInventory, final ContainerLevelAccess containerLevelAccess) {
+    public WoodcutterMenu(int syncId, Inventory playerInventory, final ContainerLevelAccess access) {
         super(WOODCUTTER_SCREEN_HANDLER.get(), syncId);
         int i;
-        this.containerLevelAccess = containerLevelAccess;
+        this.access = access;
         this.level = playerInventory.player.level();
         this.inputSlot = this.addSlot(new Slot(this.input, 0, 20, 33));
-        this.outputSlot = this.addSlot(new Slot(this.output, 1, 143, 33) {
+        this.resultSlot = this.addSlot(new Slot(this.resultContainer, 1, 143, 33) {
 
             @Override
             public boolean mayPlace(@NotNull ItemStack stack) {
@@ -70,14 +70,14 @@ public class WoodcutterMenu extends AbstractContainerMenu {
             @Override
             public void onTake(@NotNull Player player, @NotNull ItemStack stack) {
                 stack.onCraftedBy(player, stack.getCount());
-                WoodcutterMenu.this.output.awardUsedRecipes(player, this.getInputStacks());
-                int recipeInputCount = availableRecipes.entries().get(selectedRecipe.get()).inputCount();
+                WoodcutterMenu.this.resultContainer.awardUsedRecipes(player, this.getInputStacks());
+                int recipeInputCount = recipesForInput.entries().get(selectedRecipeIndex.get()).inputCount();
                 ItemStack itemStack = WoodcutterMenu.this.inputSlot.remove(recipeInputCount);
 
                 if (!itemStack.isEmpty()) {
-                    WoodcutterMenu.this.populateResult(WoodcutterMenu.this.selectedRecipe.get());
+                    WoodcutterMenu.this.setupResultSlot(WoodcutterMenu.this.selectedRecipeIndex.get());
                 }
-                containerLevelAccess.execute((level, pos) -> {
+                access.execute((level, pos) -> {
                     long l = level.getGameTime();
                     if (WoodcutterMenu.this.lastTakeTime != l) {
                         level.playSound(null, pos, SoundEvents.UI_STONECUTTER_TAKE_RESULT,
@@ -103,42 +103,71 @@ public class WoodcutterMenu extends AbstractContainerMenu {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
 
-        this.addDataSlot(this.selectedRecipe);
+        this.addDataSlot(this.selectedRecipeIndex);
     }
 
-    public int getSelectedRecipe() {
-        return this.selectedRecipe.get();
+    public int getSelectedRecipeIndex() {
+        return this.selectedRecipeIndex.get();
     }
 
-    public WoodcuttingRecipeDisplay.Grouping getAvailableRecipes() {
-        return this.availableRecipes;
+    public WoodcuttingRecipeDisplay.Grouping getVisibleRecipes() {
+        return this.recipesForInput;
     }
 
     public int getAvailableRecipeCount() {
-        return this.availableRecipes.size();
+        return this.recipesForInput.size();
     }
 
     public boolean canCraft() {
-        return this.inputSlot.hasItem() && this.availableRecipes.hasRecipes();
+        return this.inputSlot.hasItem() && this.recipesForInput.hasRecipes();
     }
 
     @Override
     public boolean stillValid(@NotNull Player player) {
-        return WoodcutterMenu.stillValid(this.containerLevelAccess, player, ModBlocks.WOODCUTTER.get());
+        return WoodcutterMenu.stillValid(this.access, player, ModBlocks.WOODCUTTER.get());
     }
 
     @Override
     public boolean clickMenuButton(@NotNull Player player, int id) {
-        if (this.isInBounds(id)) {
-            this.selectedRecipe.set(id);
-            this.populateResult(id);
-        }
+        if (this.selectedRecipeIndex.get() == id) {
+            return false;
+        } else {
+            if (this.isValidRecipeIndex(id)) {
+                getRecipeHolder(id).ifPresent(recipeDisplay -> {
+                    var optionalRecipeHolder = recipeDisplay.recipe();
 
-        return true;
+                    if (optionalRecipeHolder.isEmpty()) {
+                        return;
+                    }
+
+                    var recipeHolder = optionalRecipeHolder.get();
+                    var recipe = recipeHolder.value();
+                    var inputCount = inputSlot.getItem().getCount();
+
+                    if (inputCount >= recipe.inputCount()) {
+                        this.selectedRecipeIndex.set(id);
+                        this.resultContainer.setRecipeUsed(recipeHolder);
+                        this.resultSlot.set(recipe.assemble(createRecipeInput(), this.level.registryAccess()));
+                    }
+                });
+            }
+
+            return true;
+        }
     }
 
-    private boolean isInBounds(int id) {
-        return id >= 0 && id < this.availableRecipes.size();
+    private Optional<WoodcuttingRecipeDisplay> getRecipeHolder(int id) {
+        if (this.recipesForInput.hasRecipes() && this.isValidRecipeIndex(id)) {
+            var groupEntry = this.recipesForInput.entries().get(id);
+            return Optional.of(groupEntry.recipe());
+
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    private boolean isValidRecipeIndex(int recipeIndex) {
+        return recipeIndex >= 0 && recipeIndex < this.recipesForInput.size();
     }
 
     @Override
@@ -152,25 +181,25 @@ public class WoodcutterMenu extends AbstractContainerMenu {
     }
 
     private void updateInput(ItemStack stack) {
-        this.selectedRecipe.set(-1);
-        this.outputSlot.set(ItemStack.EMPTY);
+        this.selectedRecipeIndex.set(-1);
+        this.resultSlot.set(ItemStack.EMPTY);
 
         if (!stack.isEmpty()) {
             if (this.level instanceof ServerLevel serverWorld) {
-                this.availableRecipes = ((WoodcutterRecipeGetter) serverWorld.recipeAccess()).nemosWoodcutter$getWoodcutterRecipes().filter(stack);
+                this.recipesForInput = ((WoodcutterRecipeGetter) serverWorld.recipeAccess()).nemosWoodcutter$getWoodcutterRecipes().filter(stack);
             } else if (this.level instanceof ClientLevel clientWorld) {
-                this.availableRecipes = ((ModRecipeManagerGetter) clientWorld).nemosWoodcutter$getModRecipeManager().getWoodcutterRecipes().filter(stack);
+                this.recipesForInput = ((ModRecipeManagerGetter) clientWorld).nemosWoodcutter$getModRecipeManager().getWoodcutterRecipes().filter(stack);
             }
         } else {
-            this.availableRecipes = WoodcuttingRecipeDisplay.Grouping.empty();
+            this.recipesForInput = WoodcuttingRecipeDisplay.Grouping.empty();
         }
     }
 
-    private void populateResult(int selectedId) {
+    private void setupResultSlot(int selectedId) {
         Optional<RecipeHolder<WoodcuttingRecipe>> optionalRecipe;
 
-        if (this.availableRecipes.hasRecipes() && this.isInBounds(selectedId)) {
-            WoodcuttingRecipeDisplay.GroupEntry groupEntry = this.availableRecipes.entries().get(selectedId);
+        if (this.recipesForInput.hasRecipes() && this.isValidRecipeIndex(selectedId)) {
+            var groupEntry = this.recipesForInput.entries().get(selectedId);
             optionalRecipe = groupEntry.recipe().recipe();
 
         } else {
@@ -183,16 +212,16 @@ public class WoodcutterMenu extends AbstractContainerMenu {
                     var inputCount = inputSlot.getItem().getCount();
 
                     if (inputCount < woodcuttingRecipe.inputCount()) {
-                        this.outputSlot.set(ItemStack.EMPTY);
-                        this.output.setRecipeUsed(null);
+                        this.resultSlot.set(ItemStack.EMPTY);
+                        this.resultContainer.setRecipeUsed(null);
                     } else {
-                        this.output.setRecipeUsed(recipeEntry);
-                        this.outputSlot.set(woodcuttingRecipe.assemble(createRecipeInput(), this.level.registryAccess()));
+                        this.resultContainer.setRecipeUsed(recipeEntry);
+                        this.resultSlot.set(woodcuttingRecipe.assemble(createRecipeInput(), this.level.registryAccess()));
                     }
                 },
                 () -> {
-                    this.outputSlot.set(ItemStack.EMPTY);
-                    this.output.setRecipeUsed(null);
+                    this.resultSlot.set(ItemStack.EMPTY);
+                    this.resultContainer.setRecipeUsed(null);
                 }
         );
 
@@ -208,13 +237,13 @@ public class WoodcutterMenu extends AbstractContainerMenu {
         return WOODCUTTER_SCREEN_HANDLER.get();
     }
 
-    public void setContentsChangedListener(Runnable contentsChangedListener) {
-        this.contentsChangedListener = contentsChangedListener;
+    public void registerUpdateListener(Runnable slotUpdateListener) {
+        this.slotUpdateListener = slotUpdateListener;
     }
 
     @Override
     public boolean canTakeItemForPickAll(@NotNull ItemStack stack, Slot slot) {
-        return slot.container != this.output && super.canTakeItemForPickAll(stack, slot);
+        return slot.container != this.resultContainer && super.canTakeItemForPickAll(stack, slot);
     }
 
     @Override
@@ -279,8 +308,8 @@ public class WoodcutterMenu extends AbstractContainerMenu {
     @Override
     public void removed(@NotNull Player player) {
         super.removed(player);
-        this.output.removeItemNoUpdate(1);
-        this.containerLevelAccess.execute((world, pos) -> this.clearContainer(player, this.input));
+        this.resultContainer.removeItemNoUpdate(1);
+        this.access.execute((world, pos) -> this.clearContainer(player, this.input));
     }
 }
 

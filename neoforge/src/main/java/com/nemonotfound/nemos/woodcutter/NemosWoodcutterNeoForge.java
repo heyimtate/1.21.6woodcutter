@@ -28,7 +28,7 @@ import java.util.Optional;
 import static com.nemonotfound.nemos.woodcutter.Constants.MOD_ID;
 
 @Mod(Constants.MOD_ID)
-@EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = MOD_ID)
 public class NemosWoodcutterNeoForge {
 
     public NemosWoodcutterNeoForge(IEventBus eventBus) {

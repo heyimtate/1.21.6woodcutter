@@ -1,6 +1,6 @@
 package com.nemonotfound.nemos.woodcutter.block;
 
-import com.nemonotfound.nemos.woodcutter.screen.WoodcutterMenu;
+import com.nemonotfound.nemos.woodcutter.client.gui.screen.WoodcutterMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;

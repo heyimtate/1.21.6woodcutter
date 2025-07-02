@@ -1,5 +1,6 @@
 package com.nemonotfound.nemos.woodcutter.screen;
 
+import com.nemonotfound.nemos.woodcutter.client.gui.screen.WoodcutterMenu;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.flag.FeatureFlags;
@@ -10,7 +11,7 @@ import java.util.function.Supplier;
 
 import static com.nemonotfound.nemos.woodcutter.Constants.MOD_ID;
 import static com.nemonotfound.nemos.woodcutter.Constants.LOG;
-import static com.nemonotfound.nemos.woodcutter.screen.ModMenuTypes.WOODCUTTER_SCREEN_HANDLER;
+import static com.nemonotfound.nemos.woodcutter.client.gui.screen.ModMenuTypes.WOODCUTTER_SCREEN_HANDLER;
 
 public class ModMenuTypesFabric {
 

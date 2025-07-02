@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -28,9 +28,10 @@ public class ModBlocksForge {
                     .strength(2.0f)
                     .setId(keyOf("woodcutter"))));
 
-    public static void register(IEventBus eventBus) {
+    public static void register(BusGroup modBusGroup) {
         LOG.info("Registering mod blocks");
-        BLOCKS.register(eventBus);
+
+        BLOCKS.register(modBusGroup);
 
         WOODCUTTER = WOODCUTTER_HOLDER;
     }

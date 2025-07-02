@@ -1,4 +1,4 @@
-package com.nemonotfound.nemos.woodcutter.screen;
+package com.nemonotfound.nemos.woodcutter.client.gui.screen;
 
 import net.minecraft.world.inventory.MenuType;
 
